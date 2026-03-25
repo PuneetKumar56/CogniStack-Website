@@ -1,0 +1,135 @@
+﻿<style>
+    /* FLOATING CONTACT SIDEBAR */
+
+    .floating-contact {
+        position: fixed;
+        right: 18px;
+        top: 60%;
+        transform: translateY(-50%);
+        z-index: 9999;
+    }
+
+    /* BUTTON STYLE */
+
+    .float-btn {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        color: white;
+        font-size: 20px;
+        margin: 6px 0;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    /* COLORS */
+
+    .whatsapp {
+        background: #25D366;
+    }
+
+    .phone {
+        background: #2c7be5;
+    }
+   
+
+    .contact {
+        background: #6c757d;
+    }
+
+   
+
+    .scroll-top {
+        background: #28a745;
+    }
+
+    /* HOVER EFFECT */
+
+    .float-btn:hover {
+        transform: scale(1.12);
+    }
+
+    .whatsapp:hover {
+        background: #1ebe5d;
+    }
+
+    .contact:hover {
+        background: #495057;
+    }
+
+    /* MOBILE VIEW */
+
+    @@media (max-width:768px) {
+
+        .floating-contact {
+            right: 10px;
+            top: auto;
+            bottom: 90px;
+            transform: none;
+        }
+
+        .float-btn {
+            width: 42px;
+            height: 42px;
+            font-size: 18px;
+            margin: 6px 0;
+            border-radius: 8px;
+        }
+    }
+
+    @@media (max-width:480px) {
+
+        .float-btn {
+            width: 38px;
+            height: 38px;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+    }
+</style>
+<div class="floating-contact">
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/9193507411"
+       target="_blank"
+       class="float-btn whatsapp"
+       title="Chat on WhatsApp">
+
+        <i class="fa-brands fa-whatsapp"></i>
+
+    </a>
+
+    <!-- Call -->
+    <a href="tel:+919193507411"
+       class="float-btn phone"
+       title="Call Us">
+
+        <i class="fa-solid fa-phone"></i>
+
+    </a>
+
+
+    <!-- Contact -->
+    <a href="/Home/Contact"
+       class="float-btn contact"
+       title="Contact Us">
+
+        <i class="fa-solid fa-headset"></i>
+
+    </a>
+
+
+    <!-- Scroll Top -->
+    <a href="#"
+       class="float-btn scroll-top"
+       id="scrollTopBtn"
+       title="Back to Top">
+
+        <i class="fa-solid fa-arrow-up"></i>
+
+    </a>
+
+</div>

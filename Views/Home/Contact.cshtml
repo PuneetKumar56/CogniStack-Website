@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Contact - CogniStack";
+}
+
+<section class="hero" style="padding: 60px 0;">
+    <div class="container">
+        <h1 class="section-title" style="text-align:left;">Let's Talk</h1>
+        <p>Have a project in mind? We'd love to hear from you.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem;">
+            <div>
+                <h3>Get in Touch</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Noida, India</p>
+                <p><i class="fas fa-phone"></i> +91 9193507411</p>
+                <p><i class="fas fa-envelope"></i> cognistacktech@gmail.com</p>
+                <div class="social-icons" style="margin-top:1rem;">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <form class="contact-form" asp-controller="Home" asp-action="Contact" method="post">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="text" name="phone" placeholder="Phone Number">
+                    <select name="service" required>
+                        <option value="">Select Service</option>
+                        <option>Web Development</option>
+                        <option>Mobile App</option>
+                        <option>ERP/Software</option>
+                        <option>IT Consulting</option>
+                    </select>
+                    <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

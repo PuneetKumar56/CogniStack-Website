@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - CogniStack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="icon" type="image/png" href="~/Logo_1.png">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+			<div class="logo">
+				<img src="~/images/NavLogo.png" class="img-fluid" style="width:200px;"/>
+                @* <div class="logo-text">CogniStack</div>
+                <div class="tagline">Building Intelligent Solutions</div> *@
+            </div>
+            <div class="menu-icon"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links">
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Home" asp-action="Services">Services</a></li>
+                <li><a asp-controller="Home" asp-action="Portfolio">Portfolio</a></li>
+                <li><a asp-controller="Home" asp-action="About">About</a></li>
+                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                <li><a asp-controller="Home" asp-action="Blog">Insights</a></li>
+            </ul>
+            <partial name="_Floating_Icons" />
+
+            @* <a asp-controller="Home" asp-action="Contact" class="btn-primary">Get Quote</a> *@
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h3 style="color:white;">CogniStack</h3>
+                <p>Building Intelligent Solutions</p>
+                <p><i class="fas fa-envelope"></i> cognistacktech@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +91 9193507411</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Home" asp-action="Services">Services</a>
+                <a asp-controller="Home" asp-action="Portfolio">Portfolio</a>
+                <a asp-controller="Home" asp-action="About">About</a>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <a asp-controller="Home" asp-action="Services">Web Development</a>
+                <a asp-controller="Home" asp-action="Services">Mobile Apps</a>
+                <a asp-controller="Home" asp-action="Services">ERP Software</a>
+                <a asp-controller="Home" asp-action="Services">IT Consulting</a>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container copyright">
+            © 2026 CogniStack. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

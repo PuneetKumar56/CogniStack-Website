@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Home - CogniStack";
+}
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <h1>We Build <span class="highlight">Intelligent</span> Digital Solutions</h1>
+            <p style="font-size: 1.2rem; color: #475569;">Websites, mobile apps, custom ERP & software – crafted with modern tech and human insight.</p>
+            <div class="hero-btns">
+                <a asp-controller="Home" asp-action="Services" class="btn-primary">Explore Services</a>
+                <a asp-controller="Home" asp-action="Contact" class="btn-outline">Start a Project</a>
+            </div>
+        </div>
+        <div>
+            <img src="~/images/Logo.png" alt="Hero Image" class="img-fluid" style="width:100%; border-radius: 24px;">
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">What We Deliver</h2>
+        <p class="section-sub">End-to-end technology solutions to scale your business</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-code service-icon"></i>
+                <h3>Web Development</h3>
+                <p>Responsive, SEO-friendly websites & web apps using ASP.NET Core, React, or modern stacks.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-mobile-alt service-icon"></i>
+                <h3>Mobile Apps</h3>
+                <p>iOS & Android apps with .NET MAUI, Flutter – high performance and native experience.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-chalkboard service-icon"></i>
+                <h3>ERP & Software</h3>
+                <p>Custom ERP, inventory, school management, and billing software for small to large businesses.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-chart-line service-icon"></i>
+                <h3>Digital Transformation</h3>
+                <p>We help traditional businesses go digital with strategy, automation, and modern tools.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="container stats-grid">
+        <div><div class="stat-number">3+</div><div>Years Experience</div></div>
+        <div><div class="stat-number">50+</div><div>Projects Delivered</div></div>
+        <div><div class="stat-number">100%</div><div>Client Satisfaction</div></div>
+        <div><div class="stat-number">24/7</div><div>Support</div></div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Latest Insights</h2>
+        <p class="section-sub">Thoughts on tech, business, and innovation</p>
+        <div class="blog-grid">
+            <div class="blog-card"><i class="fas fa-newspaper"></i><h3 style="margin:1rem 0">Why Your Business Needs a Modern Website</h3><p style="color:#5b6e8c;">March 2026</p></div>
+            <div class="blog-card"><i class="fas fa-mobile"></i><h3 style="margin:1rem 0">Mobile Apps vs. Mobile Websites: What’s Best?</h3><p style="color:#5b6e8c;">March 2026</p></div>
+            <div class="blog-card"><i class="fas fa-brain"></i><h3 style="margin:1rem 0">How AI is Changing Custom Software</h3><p style="color:#5b6e8c;">February 2026</p></div>
+        </div>
+    </div>
+</section>
+
+<section style="background:#eef2ff; padding: 60px 0; text-align:center;">
+    <div class="container">
+        <h2 style="font-size:2rem;">Ready to Build Something Intelligent?</h2>
+        <p style="margin:1rem auto; max-width:600px;">Let’s discuss your idea and turn it into a powerful digital solution.</p>
+        <a asp-controller="Home" asp-action="Contact" class="btn-primary" style="margin-top:1rem;">Get a Free Consultation</a>
+    </div>
+</section>
