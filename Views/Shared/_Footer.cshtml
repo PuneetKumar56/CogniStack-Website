@@ -1,0 +1,41 @@
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    var Email = Configuration["ContactInfo:Email1"];
+	var Phone = Configuration["ContactInfo:Phone1"];
+}
+
+<footer>
+    <div class="container footer-grid">
+        <div>
+            <h3 style="color:white;">CogniStack</h3>
+            <p>Building Intelligent Solutions</p>
+            <p><i class="fas fa-envelope"></i> @Email</p>
+            <p><i class="fas fa-phone"></i> +91 @Phone</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-controller="Home" asp-action="Services">Services</a>
+            <a asp-controller="Home" asp-action="Portfolio">Portfolio</a>
+            <a asp-controller="Home" asp-action="About">About</a>
+        </div>
+        <div class="footer-links">
+            <h4>Services</h4>
+            <a asp-controller="Home" asp-action="Services">Web Development</a>
+            <a asp-controller="Home" asp-action="Services">Mobile Apps</a>
+            <a asp-controller="Home" asp-action="Services">ERP Software</a>
+            <a asp-controller="Home" asp-action="Services">IT Consulting</a>
+        </div>
+        <div>
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="container copyright">
+        © 2026 CogniStack. All rights reserved.
+    </div>
+</footer>

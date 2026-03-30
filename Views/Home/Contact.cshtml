@@ -1,6 +1,30 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration configuration
+@{
+    var Email = configuration["ContactInfo:Email1"];
+    var Phone = configuration["ContactInfo:Phone1"];
+}
+@model Contact
+@{
     ViewData["Title"] = "Contact - CogniStack";
 }
+
+<style>
+    .contact-card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: 0.3s;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+    }
+</style>
 
 <section class="hero" style="padding: 60px 0;">
     <div class="container">
@@ -15,30 +39,155 @@
             <div>
                 <h3>Get in Touch</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Noida, India</p>
-                <p><i class="fas fa-phone"></i> +91 9193507411</p>
-                <p><i class="fas fa-envelope"></i> cognistacktech@gmail.com</p>
-                <div class="social-icons" style="margin-top:1rem;">
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
+                <p><i class="fas fa-phone"></i> +91 @Phone</p>
+                <p><i class="fas fa-envelope"></i> @Email</p>
             </div>
-            <div>
-                <form class="contact-form" asp-controller="Home" asp-action="Contact" method="post">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Email Address" required>
-                    <input type="text" name="phone" placeholder="Phone Number">
-                    <select name="service" required>
-                        <option value="">Select Service</option>
-                        <option>Web Development</option>
-                        <option>Mobile App</option>
-                        <option>ERP/Software</option>
-                        <option>IT Consulting</option>
-                    </select>
-                    <textarea name="message" placeholder="Tell us about your project..." required></textarea>
-                    <button type="submit" class="btn-primary">Send Message</button>
-                </form>
+            <div class="social-icons" style="margin-top:1rem;">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
+        <div>
+            <form class="contact-form mt-5" id="contactForm" asp-controller="Home" asp-action="SendEmail" method="post">
+                @Html.AntiForgeryToken()
+                <div class="row g-3">
+                    <div class ="col-md-6">
+                        <label asp-for="Name" class="form-label">Name</label>
+                        <input type="text" asp-for="Name" class="form-control" required>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input type="email" asp-for="Email" class="form-control" required>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Phone" class="form-label">Phone</label>
+                        <!-- client-side pattern helps match the server regex -->
+                        <input type="tel" asp-for="Phone" class="form-control" required pattern="^\d{10}$" title="Enter exactly 10 digits (numbers only)">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Service" class="form-label">Service</label>
+                        <!-- bind the select to the model -->
+                        <select asp-for="Service" class="form-control" required>
+                            <option value="">Select a service</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Mobile App">Mobile App</option>
+                            <option value="ERP/Software">ERP/Software</option>
+                            <option value="IT Consulting">IT Consulting</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
+                    <label asp-for="Message" class="form-label">Message</label>
+                    <textarea asp-for="Message" placeholder="Tell us about your project or query..." required class="form-control"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <!-- use full bootstrap class so it looks/behaves correctly -->
+                        <button type="submit" class="btn btn-primary" id="contactSubmit">Send Message</button>
+                    </div>
+                </div>
+            </form>
+            @* ----------- Loader --------- *@
+            <div id="formLoader" style="display:none;" class="text-center mt-3">
+
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+
+                <p class="mt-2">Sending your message...</p>
+
+            </div>
+
+            <div style="font:500 18px arial, sans-serif" id="result"></div>
+
+
+        </div>
+       
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function(){
+        $("#contactForm").submit(function(e){
+
+            e.preventDefault();
+
+            let form = $(this);
+            let submitBtn = form.find("button[type='submit']");
+
+            // prevent multiple clicks and hide the submit button visually
+            submitBtn.prop("disabled", true).hide();
+
+            // show loader
+            $("#formLoader").show();
+            $("#result").html("");
+
+            $.ajax({
+                url: "/Home/SendEmail",
+                type: "POST",
+                data: form.serialize(),
+
+                success: function(res){
+
+                    // hide loader and restore button
+                    $("#formLoader").hide();
+                    submitBtn.prop("disabled", false).show();
+
+                    if(res.success){
+
+                        alert("Thanks for contacting us. We will reply soon.");
+
+                        $("#result")
+                            .removeClass("text-danger")
+                            .addClass("text-success")
+                            .html("Message sent successfully!");
+
+                        form[0].reset();
+                    }
+                    else{
+                        // show validation errors if present
+                        if(res.validationErrors){
+                            let html = "<ul>";
+                            Object.keys(res.validationErrors).forEach(function(k){
+                                res.validationErrors[k].forEach(function(msg){
+                                    html += "<li>" + msg + "</li>";
+                                });
+                            });
+                            html += "</ul>";
+                            $("#result")
+                                .removeClass("text-success")
+                                .addClass("text-danger")
+                                .html(html);
+                        } else {
+                            $("#result")
+                                .removeClass("text-success")
+                                .addClass("text-danger")
+                                .html("Failed to send email.");
+                        }
+                    }
+
+                },
+
+                error:function(){
+
+                    $("#formLoader").hide();
+                    submitBtn.prop("disabled", false).show();
+
+                    $("#result")
+                        .addClass("text-danger")
+                        .html("Something went wrong.");
+
+                }
+
+            });
+
+        });
+        });
+    </script>
+}

@@ -1,0 +1,21 @@
+﻿<header class="navbar">
+    <div class="container nav-wrapper">
+        <div class="logo">
+            <img src="~/images/NavLogo.png" class="img-fluid" style="width:200px;" />
+            @* <div class="logo-text">CogniStack</div>
+                <div class="tagline">Building Intelligent Solutions</div> *@
+        </div>
+        <div class="menu-icon"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-controller="Home" asp-action="Services">Services</a></li>
+            <li><a asp-controller="Home" asp-action="Portfolio">Portfolio</a></li>
+            <li><a asp-controller="Home" asp-action="About">About</a></li>
+            <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+            <li><a asp-controller="Home" asp-action="Blog">Insights</a></li>
+        </ul>
+        <partial name="_Floating_Icons" />
+
+        @* <a asp-controller="Home" asp-action="Contact" class="btn-primary">Get Quote</a> *@
+    </div>
+</header>
